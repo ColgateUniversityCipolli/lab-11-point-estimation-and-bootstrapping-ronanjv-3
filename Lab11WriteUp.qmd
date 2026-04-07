@@ -98,6 +98,93 @@ For each distribution, write a loop that completes the following 1000 times. Put
 
 Start with $n=20$. Is there evidence that $S_{n-1}^2$ is a better estimator than $S_n^2$?
 
+**Solution**
+```{r}
+set.seed(7272)
+n = 20
+
+Sn1pois = numeric(1000)
+Snpois = numeric(1000)
+Sn1binom = numeric(1000)
+Snbinom = numeric(1000)
+Sn1norm = numeric(1000)
+Snnorm = numeric(1000)
+Sn1exp = numeric(1000)
+Snexp = numeric(1000)
+
+
+for(i in 1:1000){
+pois = rpois(n,2)
+binom = rbinom(n,50,(5-sqrt(21))/10)
+norm = rnorm(n,0,sqrt(2))
+exp = rexp(n,1/(sqrt(2)))
+
+          Sn1pois[i] = var(pois)
+          Snpois[i] = (n-1)/n * var(pois)
+          Sn1binom[i] = var(binom)
+          Snbinom[i] = (n-1)/n * var(binom)
+          Sn1norm[i] = var(norm)
+          Snnorm[i] = (n-1)/n * var(norm)
+          Sn1exp[i] = var(exp)
+          Snexp[i] = (n-1)/n * var(exp)
+
+}
+results = tibble(Sn1pois,
+                 Snpois,
+                 Sn1binom,
+                 Snbinom,
+                 Sn1norm,
+                 Snnorm,
+                 Sn1exp,
+                 Snexp)
+
+results
+```
+
+```{r}
+summary = tibble(
+  Distribution = c("Poisson", "Binomial", "Normal", "Exponential"),
+  
+  BiasSn1 = c(mean(Sn1pois)  - 2,
+               mean(Sn1binom) - 2,
+               mean(Sn1norm)  - 2,
+               mean(Sn1exp)   - 2),
+  
+  BiasSn = c(mean(Snpois)  - 2,
+              mean(Snbinom) - 2,
+              mean(Snnorm)  - 2,
+              mean(Snexp)   - 2),
+  
+  PrecisionSn1 = c(1/var(Sn1pois),
+                    1/var(Sn1binom),
+                    1/var(Sn1norm),
+                    1/var(Sn1exp)),
+  
+  PrecisionSn = c(1/var(Snpois),
+                   1/var(Snbinom),
+                   1/var(Snnorm),
+                   1/var(Snexp)),
+  
+  MSESn1 = c(BiasSn1[1]^2 + var(Sn1pois),
+              BiasSn1[2]^2 + var(Sn1binom),
+              BiasSn1[3]^2 + var(Sn1norm),
+              BiasSn1[4]^2 + var(Sn1exp)),
+  
+  MSESn = c(BiasSn[1]^2 + var(Snpois),
+             BiasSn[2]^2 + var(Snbinom),
+             BiasSn[3]^2 + var(Snnorm),
+             BiasSn[4]^2 + var(Snexp))
+)
+summary |>
+  knitr::kable(
+    col.names = c("Distribution", 
+                  "Bias (Sn1)", "Bias (Sn)", 
+                  "Precision (Sn1)", "Precision (Sn)",
+                  "MSE (Sn1)", "MSE (Sn)"))
+```
+
+
+
 Create a plot or combination of plots (using patchwork) to show the results across all four distributions. Make sure to create a corresponding table that numerically summarizes the results of the simulation. You should include
 \begin{align*}
 \textrm{Bias} &= \textrm{Average of Estimates} - \textrm{True Value}\\
