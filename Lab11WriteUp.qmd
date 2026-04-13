@@ -727,8 +727,92 @@ As n increases from 20 to 500, the bias of Sn-1​ stays close to 0 across all f
 ## Simulation
 You have written code to draw a random sample of various sizes from each distribution, and to calculate and store the calculated estimates. Rework your code to produce a density plot of the $s_{n-1}^2$ and $s_{n}^2$. Do you have a guess about their distribution? Ensure to set your randomization seed. 
 
+**Solution**
+The distributions are right-skewed at small n, but become more symmetric and bell-shaped as n increases. The graphs begin looking approximately normal for large degrees of freedom. This is similar to a chi-squared distribution.
+
 ## Bootstrap
 Now, take *one* sample from each distribution. Instead of drawing a random sample at each iteration, sample *with replacement* from the one sample. Produce a density plot of the $s_{n-1}^2$ and $s_{n}^2$. Do we get roughly the same information as we do in the full simulation? Try this over several seeds -- what do you notice? Ensure to set your randomization seed.
+
+**Solution**
+```{r}
+set.seed(7272)
+n = 20
+
+pois_samp = rpois(n,2)
+binom_samp = rbinom(n,50,(5-sqrt(21))/10)
+norm_samp = rnorm(n,0,sqrt(2))
+exp_samp = rexp(n,1/(sqrt(2)))
+
+Sn1pois = numeric(1000)
+Snpois = numeric(1000)
+Sn1binom = numeric(1000)
+Snbinom = numeric(1000)
+Sn1norm = numeric(1000)
+Snnorm = numeric(1000)
+Sn1exp = numeric(1000)
+Snexp = numeric(1000)
+
+for(i in 1:1000){
+  pois = sample(pois_samp, n, replace = TRUE)
+  binom = sample(binom_samp, n, replace = TRUE)
+  norm = sample(norm_samp, n, replace = TRUE)
+  exp = sample(exp_samp, n, replace = TRUE)
+
+  Sn1pois[i] = var(pois)
+  Snpois[i] = (n-1)/n * var(pois)
+  Sn1binom[i] = var(binom)
+  Snbinom[i] = (n-1)/n * var(binom)
+  Sn1norm[i] = var(norm)
+  Snnorm[i] = (n-1)/n * var(norm)
+  Sn1exp[i] = var(exp)
+  Snexp[i] = (n-1)/n * var(exp)
+}
+
+boot_results = tibble(Sn1pois,
+                      Snpois,
+                      Sn1binom,
+                      Snbinom,
+                      Sn1norm,
+                      Snnorm,
+                      Sn1exp,
+                      Snexp)
+```
+```{r}
+#| label: Bootstrapping
+#| fig-cap: "Bootstrapping graphs"
+#| fig-width: 7
+#| fig-height: 5
+#| scale: "110%"
+#| fig-align: "center"
+#| size: scriptsize
+
+p1 = ggplot(boot_results) +
+  geom_density(aes(x = Sn1pois, color = "Sn1")) +
+  geom_density(aes(x = Snpois, color = "Sn")) +
+  geom_vline(xintercept = 2, linetype = "dashed") +
+  labs(title = "Poisson", x = "Estimate", y = "Density", color = "Estimator")
+
+p2 = ggplot(boot_results) +
+  geom_density(aes(x = Sn1binom, color = "Sn1")) +
+  geom_density(aes(x = Snbinom, color = "Sn")) +
+  geom_vline(xintercept = 2, linetype = "dashed") +
+  labs(title = "Binomial", x = "Estimate", y = "Density", color = "Estimator")
+
+p3 = ggplot(boot_results) +
+  geom_density(aes(x = Sn1norm, color = "Sn1")) +
+  geom_density(aes(x = Snnorm, color = "Sn")) +
+  geom_vline(xintercept = 2, linetype = "dashed") +
+  labs(title = "Normal", x = "Estimate", y = "Density", color = "Estimator")
+
+p4 = ggplot(boot_results) +
+  geom_density(aes(x = Sn1exp, color = "Sn1")) +
+  geom_density(aes(x = Snexp, color = "Sn")) +
+  geom_vline(xintercept = 2, linetype = "dashed") +
+  labs(title = "Exponential", x = "Estimate", y = "Density", color = "Estimator")
+
+(p1 + p2) / (p3 + p4)
+```
+Trying this over several seeds, I notice that the bootstrap distributions are always centered around the sample variance of the original sample rather than the true variance of 2. When the original sample happens to have a variance close to 2, the bootstrap looks very similar to the full simulation. When the original sample has a variance far from 2, the bootstrap center shifts noticeably away from 2. 
 
 
 # Executive Summary
