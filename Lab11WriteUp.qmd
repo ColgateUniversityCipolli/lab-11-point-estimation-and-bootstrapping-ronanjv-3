@@ -203,26 +203,26 @@ Create a plot or combination of plots (using patchwork) to show the results acro
 #| size: scriptsize
 
 p1 = ggplot(results) +
-  geom_density(aes(x = Sn1pois, fill = "Sn1"), alpha = 0.5) +
-  geom_density(aes(x = Snpois, fill = "Sn"), alpha = 0.5) +
+  geom_density(aes(x = Sn1pois, color = "Sn1")) +
+  geom_density(aes(x = Snpois, color = "Sn")) +
   geom_vline(xintercept = 2, linetype = "dashed") +
   labs(title = "Poisson", x = "Estimate", y = "Density", fill = "Estimator")
 
 p2 = ggplot(results) +
-  geom_density(aes(x = Sn1binom, fill = "Sn1"), alpha = 0.5) +
-  geom_density(aes(x = Snbinom, fill = "Sn"), alpha = 0.5) +
+  geom_density(aes(x = Sn1binom, color = "Sn1")) +
+  geom_density(aes(x = Snbinom, color = "Sn")) +
   geom_vline(xintercept = 2, linetype = "dashed") +
   labs(title = "Binomial", x = "Estimate", y = "Density", fill = "Estimator")
 
 p3 = ggplot(results) +
-  geom_density(aes(x = Sn1norm, fill = "Sn1"), alpha = 0.5) +
-  geom_density(aes(x = Snnorm, fill = "Sn"), alpha = 0.5) +
+  geom_density(aes(x = Sn1norm, color = "Sn1")) +
+  geom_density(aes(x = Snnorm, color = "Sn")) +
   geom_vline(xintercept = 2, linetype = "dashed") +
   labs(title = "Normal", x = "Estimate", y = "Density", fill = "Estimator")
 
 p4 = ggplot(results) +
-  geom_density(aes(x = Sn1exp, fill = "Sn1"), alpha = 0.5) +
-  geom_density(aes(x = Snexp, fill = "Sn"), alpha = 0.5) +
+  geom_density(aes(x = Sn1exp, color = "Sn1")) +
+  geom_density(aes(x = Snexp, color = "Sn")) +
   geom_vline(xintercept = 2, linetype = "dashed") +
   labs(title = "Exponential", x = "Estimate", y = "Density", fill = "Estimator")
 
@@ -326,26 +326,26 @@ summary1 |>
 #| size: scriptsize
 
 p1 = ggplot(results) +
-  geom_density(aes(x = Sn1pois, fill = "Sn1"), alpha = 0.5) +
-  geom_density(aes(x = Snpois, fill = "Sn"), alpha = 0.5) +
+  geom_density(aes(x = Sn1pois, color = "Sn1")) +
+  geom_density(aes(x = Snpois, color = "Sn")) +
   geom_vline(xintercept = 2, linetype = "dashed") +
   labs(title = "Poisson", x = "Estimate", y = "Density", fill = "Estimator")
 
 p2 = ggplot(results) +
-  geom_density(aes(x = Sn1binom, fill = "Sn1"), alpha = 0.5) +
-  geom_density(aes(x = Snbinom, fill = "Sn"), alpha = 0.5) +
+  geom_density(aes(x = Sn1binom, color = "Sn1")) +
+  geom_density(aes(x = Snbinom, color = "Sn")) +
   geom_vline(xintercept = 2, linetype = "dashed") +
   labs(title = "Binomial", x = "Estimate", y = "Density", fill = "Estimator")
 
 p3 = ggplot(results) +
-  geom_density(aes(x = Sn1norm, fill = "Sn1"), alpha = 0.5) +
-  geom_density(aes(x = Snnorm, fill = "Sn"), alpha = 0.5) +
+  geom_density(aes(x = Sn1norm, color = "Sn1")) +
+  geom_density(aes(x = Snnorm, color = "Sn")) +
   geom_vline(xintercept = 2, linetype = "dashed") +
   labs(title = "Normal", x = "Estimate", y = "Density", fill = "Estimator")
 
 p4 = ggplot(results) +
-  geom_density(aes(x = Sn1exp, fill = "Sn1"), alpha = 0.5) +
-  geom_density(aes(x = Snexp, fill = "Sn"), alpha = 0.5) +
+  geom_density(aes(x = Sn1exp, color = "Sn1")) +
+  geom_density(aes(x = Snexp, color = "Sn")) +
   geom_vline(xintercept = 2, linetype = "dashed") +
   labs(title = "Exponential", x = "Estimate", y = "Density", fill = "Estimator")
 
@@ -449,26 +449,26 @@ summary2 |>
 #| size: scriptsize
 
 p1 = ggplot(results) +
-  geom_density(aes(x = Sn1pois, fill = "Sn1"), alpha = 0.5) +
-  geom_density(aes(x = Snpois, fill = "Sn"), alpha = 0.5) +
+  geom_density(aes(x = Sn1pois, color = "Sn1")) +
+  geom_density(aes(x = Snpois, color = "Sn")) +
   geom_vline(xintercept = 2, linetype = "dashed") +
   labs(title = "Poisson", x = "Estimate", y = "Density", fill = "Estimator")
 
 p2 = ggplot(results) +
-  geom_density(aes(x = Sn1binom, fill = "Sn1"), alpha = 0.5) +
-  geom_density(aes(x = Snbinom, fill = "Sn"), alpha = 0.5) +
+  geom_density(aes(x = Sn1binom, color = "Sn1")) +
+  geom_density(aes(x = Snbinom, color = "Sn")) +
   geom_vline(xintercept = 2, linetype = "dashed") +
   labs(title = "Binomial", x = "Estimate", y = "Density", fill = "Estimator")
 
 p3 = ggplot(results) +
-  geom_density(aes(x = Sn1norm, fill = "Sn1"), alpha = 0.5) +
-  geom_density(aes(x = Snnorm, fill = "Sn"), alpha = 0.5) +
+  geom_density(aes(x = Sn1norm, color = "Sn1")) +
+  geom_density(aes(x = Snnorm, color = "Sn")) +
   geom_vline(xintercept = 2, linetype = "dashed") +
   labs(title = "Normal", x = "Estimate", y = "Density", fill = "Estimator")
 
 p4 = ggplot(results) +
-  geom_density(aes(x = Sn1exp, fill = "Sn1"), alpha = 0.5) +
-  geom_density(aes(x = Snexp, fill = "Sn"), alpha = 0.5) +
+  geom_density(aes(x = Sn1exp, color = "Sn1")) +
+  geom_density(aes(x = Snexp, color = "Sn")) +
   geom_vline(xintercept = 2, linetype = "dashed") +
   labs(title = "Exponential", x = "Estimate", y = "Density", fill = "Estimator")
 
@@ -572,26 +572,26 @@ summary3 |>
 #| size: scriptsize
 
 p1 = ggplot(results) +
-  geom_density(aes(x = Sn1pois, fill = "Sn1"), alpha = 0.5) +
-  geom_density(aes(x = Snpois, fill = "Sn"), alpha = 0.5) +
+  geom_density(aes(x = Sn1pois, color = "Sn1")) +
+  geom_density(aes(x = Snpois, color = "Sn")) +
   geom_vline(xintercept = 2, linetype = "dashed") +
   labs(title = "Poisson", x = "Estimate", y = "Density", fill = "Estimator")
 
 p2 = ggplot(results) +
-  geom_density(aes(x = Sn1binom, fill = "Sn1"), alpha = 0.5) +
-  geom_density(aes(x = Snbinom, fill = "Sn"), alpha = 0.5) +
+  geom_density(aes(x = Sn1binom, color = "Sn1")) +
+  geom_density(aes(x = Snbinom, color = "Sn")) +
   geom_vline(xintercept = 2, linetype = "dashed") +
   labs(title = "Binomial", x = "Estimate", y = "Density", fill = "Estimator")
 
 p3 = ggplot(results) +
-  geom_density(aes(x = Sn1norm, fill = "Sn1"), alpha = 0.5) +
-  geom_density(aes(x = Snnorm, fill = "Sn"), alpha = 0.5) +
+  geom_density(aes(x = Sn1norm, color = "Sn1")) +
+  geom_density(aes(x = Snnorm, color = "Sn")) +
   geom_vline(xintercept = 2, linetype = "dashed") +
   labs(title = "Normal", x = "Estimate", y = "Density", fill = "Estimator")
 
 p4 = ggplot(results) +
-  geom_density(aes(x = Sn1exp, fill = "Sn1"), alpha = 0.5) +
-  geom_density(aes(x = Snexp, fill = "Sn"), alpha = 0.5) +
+  geom_density(aes(x = Sn1exp, color = "Sn1")) +
+  geom_density(aes(x = Snexp, color = "Sn")) +
   geom_vline(xintercept = 2, linetype = "dashed") +
   labs(title = "Exponential", x = "Estimate", y = "Density", fill = "Estimator")
 
@@ -696,26 +696,26 @@ summary4 |>
 #| size: scriptsize
 
 p1 = ggplot(results) +
-  geom_density(aes(x = Sn1pois, fill = "Sn1"), alpha = 0.5) +
-  geom_density(aes(x = Snpois, fill = "Sn"), alpha = 0.5) +
+  geom_density(aes(x = Sn1pois, color = "Sn1")) +
+  geom_density(aes(x = Snpois, color = "Sn")) +
   geom_vline(xintercept = 2, linetype = "dashed") +
   labs(title = "Poisson", x = "Estimate", y = "Density", fill = "Estimator")
 
 p2 = ggplot(results) +
-  geom_density(aes(x = Sn1binom, fill = "Sn1"), alpha = 0.5) +
-  geom_density(aes(x = Snbinom, fill = "Sn"), alpha = 0.5) +
+  geom_density(aes(x = Sn1binom, color = "Sn1")) +
+  geom_density(aes(x = Snbinom, color = "Sn")) +
   geom_vline(xintercept = 2, linetype = "dashed") +
   labs(title = "Binomial", x = "Estimate", y = "Density", fill = "Estimator")
 
 p3 = ggplot(results) +
-  geom_density(aes(x = Sn1norm, fill = "Sn1"), alpha = 0.5) +
-  geom_density(aes(x = Snnorm, fill = "Sn"), alpha = 0.5) +
+  geom_density(aes(x = Sn1norm, color = "Sn1")) +
+  geom_density(aes(x = Snnorm, color = "Sn")) +
   geom_vline(xintercept = 2, linetype = "dashed") +
   labs(title = "Normal", x = "Estimate", y = "Density", fill = "Estimator")
 
 p4 = ggplot(results) +
-  geom_density(aes(x = Sn1exp, fill = "Sn1"), alpha = 0.5) +
-  geom_density(aes(x = Snexp, fill = "Sn"), alpha = 0.5) +
+  geom_density(aes(x = Sn1exp, color = "Sn1")) +
+  geom_density(aes(x = Snexp, color = "Sn")) +
   geom_vline(xintercept = 2, linetype = "dashed") +
   labs(title = "Exponential", x = "Estimate", y = "Density", fill = "Estimator")
 
